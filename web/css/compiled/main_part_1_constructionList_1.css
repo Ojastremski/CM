@@ -1,0 +1,26 @@
+.body-container {
+    flex: 1;
+    min-height: 600px;
+}
+
+#sidebar .section {
+    margin-bottom: 2em;
+}
+
+.item-actions {
+    white-space: nowrap;
+}
+
+td {
+    vertical-align: unset !important;
+}
+
+.colName {
+    min-width: 250px;
+}
+
+@media (max-width: 1200px) and (min-width: 768px) {
+    .container {
+        width: 98%;
+    }
+}

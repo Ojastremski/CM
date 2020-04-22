@@ -1,0 +1,7 @@
+login:
+    path:     /login
+    defaults: { _controller: AccessBundle:Access:login }
+
+logout:
+    path:     /logout
+    defaults: { _controller: AccessBundle:Access:logout }

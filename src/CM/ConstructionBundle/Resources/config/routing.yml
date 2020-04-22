@@ -1,0 +1,3 @@
+construction_homepage:
+    path:     /
+    defaults: { _controller: ConstructionBundle:Default:index }

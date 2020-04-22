@@ -1,0 +1,27 @@
+{% extends '@Access/base.html.twig' %}
+
+{% block body %}
+
+    <div class="flex-container">
+        <div class="row">
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="box">
+                {{ form_start(form) }}
+                    <fieldset>
+                        <legend>
+                            <i class="fa fa-lock" aria-hidden="true"></i> 
+                            Bezpieczne logowanie
+                        </legend>
+                        {{ form_row(form._username) }}
+                        {{ form_row(form._password) }}
+                        {{ form_widget(form.rememberme) }}
+                        <button type="submit" class="btn btn-primary">Zaloguj się <i class="fas fa-sign-in-alt"></i></button>
+                    </fieldset>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

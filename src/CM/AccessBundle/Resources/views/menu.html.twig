@@ -1,0 +1,63 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="sr-only">Przełącz nawigację</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="#">
+            UWEM
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">
+                    <i class="far fa-list-alt" aria-hidden="true"></i> Budowy
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-tools" aria-hidden="true"></i> Sprzęt
+                </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-search"></i> Wyszukaj</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span class="caret"></span>
+                    <span class="sr-only">Jane Doe</span>
+                </a>
+                <ul class="dropdown-menu user" role="menu" aria-labelledby="user">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-edit" aria-hidden="true"></i> Profil
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        {% if is_granted('ROLE_USER') %}
+                            <a href="{{ path('logout') }}">
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Wyloguj się
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="locales">
+                    <i class="fab fa-creative-commons-nd" aria-hidden="true"></i>
+                    <span class="caret"></span>
+                    <span class="sr-only">Opcje</span>
+                </a>
+                <ul class="dropdown-menu locales" role="menu" aria-labelledby="locales">
+                </ul>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>
