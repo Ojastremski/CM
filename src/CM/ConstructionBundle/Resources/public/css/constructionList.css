@@ -1,4 +1,6 @@
 .body-container {
+    font-family: Consolas, monaco, monospace;
+    font-size: 18px;
     flex: 1;
     min-height: 600px;
 }

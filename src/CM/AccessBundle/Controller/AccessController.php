@@ -23,10 +23,13 @@ class AccessController extends Controller
         ]);
 
 
-        return $this->render('@Access/login/login.html.twig', [
-            'form' => $form->createView(),
-            'error'         => $error,
-        ]);
+        return $this->render(
+            '@Access/login/login.html.twig', 
+            [
+                'form' => $form->createView(),
+                'error'         => $error,
+            ]
+        );
     }
 
     public function logoutAction() {

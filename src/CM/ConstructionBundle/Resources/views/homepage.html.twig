@@ -26,22 +26,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="colName"><a href="#">Gliwice Bojkowska</a></td>
-                            <td>05.12.2017, 17:36</td>
-                            <td class="text-center">
-                                <div class="item-actions">
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit" aria-hidden="true"></i>
-                                        Edytuj
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
-                                        Usuń
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        {% for construction in constructions %}
+                            <tr>
+                                <td class="colName"><a href="#">{{ construction.constructionName }}</a></td>
+                                <td>{{ construction.publishedAt|localizeddate('medium', 'short', null, 'UTC') }}</td>
+                                <td class="text-center">
+                                    <div class="item-actions">
+                                        <a href="#" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit" aria-hidden="true"></i>
+                                            Edytuj
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                            Usuń
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4" align="center">Brak objektów</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
