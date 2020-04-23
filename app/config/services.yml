@@ -17,3 +17,8 @@ services:
     app.security.login_form_authenticator:
         class: CM\AccessBundle\Security\LoginFormAuthenticator
         tags: ['app.security.login_form_authenticator']
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags: ['twig.extension']
+            
