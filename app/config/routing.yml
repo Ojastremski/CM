@@ -1,8 +1,7 @@
 construction:
     resource: "@ConstructionBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /page
 
 access:
     resource: "@AccessBundle/Resources/config/routing.yml"
     prefix:   /
-

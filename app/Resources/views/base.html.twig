@@ -1,13 +1,56 @@
+<!--
+	Olek Jastremski
+	14.04.2020
+	UWEB - USE WEB EQUIPMENT MANAGEMENT (v 1.0)
+	For USEWEB
+-->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name = "keywords" content = "HTML, Meta Tags, Metadata" />
+        <meta name = "description" content = "Construction management" />
+        <meta name = "author" content = "Olek Jastremski" />
+        <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8" />
+
+        <title>CM - Construction Management</title>
+        
+        {% stylesheets '@AccessBundle/Resources/public/css/bootstrap/*' output='css/compiled/main.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% stylesheets '@AccessBundle/Resources/public/css/fontawesome/*' output='css/compiled/main.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% stylesheets '@AccessBundle/Resources/public/css/app/*' output='css/compiled/main.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% javascripts '@AccessBundle/Resources/public/js/bootstrap/*' output='js/compiled/main.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% block header %}
+        {% endblock %}
+   </head>
+
+   <body>
+
+        <header>
+            <!-- menu render -->
+            {% if is_granted('ROLE_USER') %}
+                {{ include('menu.html.twig') }}
+            {% endif %}
+        </header>
+
+        {% block body %}
+	    {% endblock %}
+
+        <footer id="footer">
+
+        </footer>
     </body>
+
 </html>

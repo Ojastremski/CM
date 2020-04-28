@@ -26,7 +26,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->em = $em;
         $this->router = $router;
     }
-    
+
     public function getCredentials(Request $request)
     {
         $isLoginSubmit = $request->getPathInfo() == '/login' && $request->isMethod('POST');
@@ -41,8 +41,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         $data = $form->getData();
 
-        if ($request->request->has('login_form')){
-            if (isset($request->request->get('login_form')['rememberme'])){
+        if ($request->request->has('login_form')['rememberme']){
+            if ($request->request->get('login_form')['rememberme']) {
                 $request->getSession()->set(
                     Security::LAST_USERNAME,
                     $data['_username']

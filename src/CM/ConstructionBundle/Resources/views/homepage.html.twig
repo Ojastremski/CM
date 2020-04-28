@@ -1,17 +1,21 @@
-{% extends '@Access/base.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block header %}
     {% stylesheets '@ConstructionBundle/Resources/public/css/*' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
+    
+    {% javascripts '@ConstructionBundle/Resources/public/js/*' output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 {% block body %}
     <div class="container body-container">
         <div class="row">
             <div id="main" class="col-sm-10">
-                <div class="messages"></div>
+                {{ include('form/flash_messages.html.twig') }}
                 <h1>Lista otwartych objektów budowlanych</h1>
-                <table class="table table-striped table-middle-aligned">
+                <table id="scroll" class="table table-striped table-middle-aligned">
                     <thead>
                         <tr>
                             <th scope="col">Nazwa</th>
@@ -28,7 +32,7 @@
                     <tbody>
                         {% for construction in constructions %}
                             <tr>
-                                <td class="colName"><a href="#">{{ construction.constructionName }}</a></td>
+                                <td><a href="#">{{ construction.constructionName }}</a></td>
                                 <td>{{ construction.publishedAt|localizeddate('medium', 'short', null, 'UTC') }}</td>
                                 <td class="text-center">
                                     <div class="item-actions">
@@ -53,12 +57,11 @@
             </div>
             <div id="sidebar" class="col-sm-2">
                 <div class="section actions">
-                    <a href="#" class="btn btn-lg btn-block btn-success">
+                    <a href="{{ path('construction_add') }}" class="btn btn-lg btn-block btn-success">
                         <i class="fas fa-plus" aria-hidden="true"></i> Nowy objekt
                     </a>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
