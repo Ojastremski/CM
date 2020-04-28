@@ -22,3 +22,6 @@ security:
             logout:
                 path: /logout
                 target: /login
+
+    access_control:
+        - { path: ^/page, roles: ROLE_USER }

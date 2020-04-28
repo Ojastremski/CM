@@ -1,0 +1,9 @@
+textarea {
+    resize: vertical;
+    min-height: 40px;
+    max-height: 200px;
+}
+
+.form-control {
+    border: 2px solid #dce4ec;
+}

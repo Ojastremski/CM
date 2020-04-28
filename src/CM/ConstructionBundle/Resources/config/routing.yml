@@ -1,3 +1,7 @@
 construction_homepage:
-    path:     /
+    path:     /constructions
     defaults: { _controller: ConstructionBundle:LoadData:load }
+
+construction_add:
+    path: /construction/add
+    defaults: { _controller: ConstructionBundle:AddConstruction:AddConstruction }
