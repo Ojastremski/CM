@@ -145,6 +145,13 @@ ul {
     color: #fff;
 }
 
+.body-container {
+    font-family: Consolas, monaco, monospace;
+    font-size: 18px;
+    flex: 1;
+    min-height: 600px;
+}
+
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
         color: #fff;

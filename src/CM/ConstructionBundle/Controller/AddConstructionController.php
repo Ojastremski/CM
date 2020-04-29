@@ -3,7 +3,7 @@
 namespace CM\ConstructionBundle\Controller;
 
 use CM\ConstructionBundle\Entity\Construction;
-use CM\ConstructionBundle\Form\AddConstructionForm;
+use CM\ConstructionBundle\Form\ConstructionForm;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +16,7 @@ class AddConstructionController extends Controller
         $construction = new Construction();
         $construction->setAuthor($this->getUser()->getId());
 
-        $form = $this->createForm(AddConstructionForm::class, $construction)
+        $form = $this->createForm(ConstructionForm::class, $construction)
             ->add('saveAndCreateNew', SubmitType::class);
 
         $form->handleRequest($request);

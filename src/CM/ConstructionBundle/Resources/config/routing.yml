@@ -5,3 +5,7 @@ construction_homepage:
 construction_add:
     path: /construction/add
     defaults: { _controller: ConstructionBundle:AddConstruction:AddConstruction }
+    
+construction_edit:
+    path: /construction/edit/{id}
+    defaults: { _controller: ConstructionBundle:EditConstruction:EditConstruction }
