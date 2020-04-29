@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block header %}
+
     {% stylesheets '@ConstructionBundle/Resources/public/css/ConstructionForm/*' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
@@ -17,23 +18,12 @@
         <div class="row">
             <div class="col-sm-9">
                 {{ include('form/flash_messages.html.twig') }}
-                <h1>Tworzenie nowego objektu</h1>
-                {{ form_start(form) }}
-                    {{ form_row(form.constructionName) }}
-                    {{ form_row(form.description) }}
-                    {{ form_row(form.note) }}
-                    {{ form_row(form.noteVisibility) }}
-                    {{ form_row(form.publishedAt) }}
-
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save" aria-hidden="true"></i>
-                        Dodaj
-                    </button>
-                    {{ form_widget(form.saveAndCreateNew, {label: 'Zapisz i dodaj kolejną', attr: {class: 'btn btn-primary'}}) }}
-                    <a href="{{ path('construction_homepage') }}" class="btn btn-link">
-                        <i class="far fa-list-alt" aria-hidden="true"></i> Powrót do listy objektów
-                    </a>
-                {{ form_end(form) }}
+                <h1>Edytuj objekt</h1>
+                {{ include('form/construction_template.html.twig', {
+                    form: form,
+                    button_label: 'Zapisz',
+                    include_back_to_home_link: true,
+                }, with_context = false) }}
             </div>
             <div id="sidebar" class="col-sm-3">
                 <div class="alert alert-info">
