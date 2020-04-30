@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList/*' output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container body-container">
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                {{ include('form/confirmation_message.html.twig') }}
+                <h1>{{ construction.constructionName }}</h1>
+                
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fas fa-user"></i> {{ authorName }}</span>
+                </p>
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fas fa-calendar-alt"></i> {{ construction.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
+                </p>
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fas fa-edit"></i> {{ construction.modifiedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
+                </p>
+
+                {% if construction.noteVisibility == 'subpage' %}
+                    <div class="alert alert-warning" role="alert">
+                        <p>{{ construction.note }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="well">
+                    <p>{{ construction.description }}</p>
+                </div>
+
+            </div>
+            <div id="sidebar" class="col-sm-3">
+                <div class="section actions">
+                    <a href="#" class="btn btn-block btn-lg btn-default">
+                        <i class="fas fa-plus" aria-hidden="true"></i> Przypisz sprzęt
+                    </a>
+                </div>
+                <div class="section actions">
+                    <a href="{{ path('construction_edit', {id: construction.id}) }}" class="btn btn-block btn-lg btn-primary">
+                        <i class="fas fa-edit" aria-hidden="true"></i> Edytuj
+                    </a>
+                </div>
+                <div class="section actions">
+                    <a data-construction-id="{{construction.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-lg btn-block btn-danger">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                        Usuń
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

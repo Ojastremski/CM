@@ -13,3 +13,7 @@ construction_edit:
 construction_delete:
     path: /construction/delete
     defaults: { _controller: ConstructionBundle:AddConstruction:DeleteConstruction }
+
+construction_details:
+    path: /construction/details/{id}
+    defaults: { _controller: ConstructionBundle:ShowDetails:ShowDetails }

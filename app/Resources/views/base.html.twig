@@ -24,7 +24,11 @@
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        {% stylesheets '@AccessBundle/Resources/public/css/app/*' output='css/compiled/main.css' %}
+        {% stylesheets '@AccessBundle/Resources/public/css/app/style.css'%}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% stylesheets '@ConstructionBundle/Resources/public/css/bootstrap-datetimepicker.css' output='css/compiled/main.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
