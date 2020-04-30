@@ -9,3 +9,7 @@ construction_add:
 construction_edit:
     path: /construction/edit/{id}
     defaults: { _controller: ConstructionBundle:EditConstruction:EditConstruction }
+
+construction_delete:
+    path: /construction/delete
+    defaults: { _controller: ConstructionBundle:AddConstruction:DeleteConstruction }

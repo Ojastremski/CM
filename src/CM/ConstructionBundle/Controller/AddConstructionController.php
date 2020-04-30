@@ -51,4 +51,22 @@ class AddConstructionController extends Controller
             ]
         );
     }
+
+    public function DeleteConstructionAction(Request $request)
+    {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('construction_homepage');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $construction = $em->getRepository(Construction::class)
+            ->find($request->request->get('construction_id'));
+        
+        $em->remove($construction);
+        $em->flush();
+
+        $this->addFlash('success', 'Objekt został usunięty!');
+
+        return $this->redirectToRoute('construction_homepage');
+    }
 }
