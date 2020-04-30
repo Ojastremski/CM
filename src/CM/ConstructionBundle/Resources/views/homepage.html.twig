@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block header %}
-    {% stylesheets '@ConstructionBundle/Resources/public/css/ConstructionList/*' output='css/compiled/main.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-    
+
     {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList/*' output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    
 {% endblock %}
 
 {% block body %}
     <div class="container body-container">
         <div class="row">
-            <div id="main" class="col-sm-10">
+            <div id="main" class="col-sm-9">
                 {{ include('form/confirmation_message.html.twig') }}
                 {{ include('form/flash_messages.html.twig') }}
                 <h1>Lista otwartych objektów budowlanych</h1>
@@ -34,7 +32,7 @@
                     <tbody>
                         {% for construction in constructions %}
                             <tr>
-                                <td><a href="#">{{ construction.constructionName }}</a></td>
+                                <td><a href="{{ path('construction_details', {id: construction.id}) }}">{{ construction.constructionName }}</a></td>
                                 <td>{{ construction.publishedAt|localizeddate('medium', 'short', null, 'UTC') }}</td>
                                 <td class="text-center">
                                     <div class="item-actions">
@@ -57,9 +55,9 @@
                     </tbody>
                 </table>
             </div>
-            <div id="sidebar" class="col-sm-2">
+            <div id="sidebar" class="col-sm-3">
                 <div class="section actions">
-                    <a href="{{ path('construction_add') }}" class="btn btn-lg btn-success">
+                    <a href="{{ path('construction_add') }}" class="btn btn-block btn-lg btn-success">
                         <i class="fas fa-plus" aria-hidden="true"></i> Nowy objekt
                     </a>
                 </div>

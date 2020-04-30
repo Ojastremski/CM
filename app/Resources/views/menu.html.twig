@@ -1,3 +1,8 @@
+{% block header %}
+    {% stylesheets '@AccessBundle/Resources/public/css/app/menu.css'%}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">

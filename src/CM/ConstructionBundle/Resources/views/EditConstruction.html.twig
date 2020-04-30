@@ -2,10 +2,6 @@
 
 {% block header %}
 
-    {% stylesheets '@ConstructionBundle/Resources/public/css/ConstructionForm/*' output='css/compiled/main.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-
     {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionForm/*' output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
