@@ -27,9 +27,9 @@ class AddConstructionController extends Controller
 
             if ($construction->getNote())
             {
-                $construction->setNoteVisibility($request->request->get('add_construction_form')['noteVisibility']);
+                $construction->setNoteVisibility($request->request->get('construction_form')['noteVisibility']);
             }
-
+            
             $em->persist($construction);
             $em->flush();
 

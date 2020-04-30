@@ -28,7 +28,7 @@ class EditConstructionController extends Controller
             
             date_default_timezone_set("Europe/Warsaw");
             $construction->setModifiedAt(new \DateTime(date("Y-m-d H:i:s")));
-
+            
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Objekt został zaktualizowany!');
 
