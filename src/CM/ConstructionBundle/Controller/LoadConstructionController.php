@@ -6,7 +6,7 @@ use CM\ConstructionBundle\Entity\Construction;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class LoadDataController extends Controller
+class LoadConstructionController extends Controller
 {
     public function loadAction()
     {   
