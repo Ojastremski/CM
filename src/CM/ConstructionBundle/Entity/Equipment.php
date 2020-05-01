@@ -62,9 +62,11 @@ class Equipment
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=80, options={"default":"not_used"}, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Construction", fetch="EAGER")
+     * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
     */
-    private $target = "not_used";
+    private $target;
+
 
     /**
      * Get id
@@ -245,30 +247,6 @@ class Equipment
     }
 
     /**
-     * Set target
-     *
-     * @param string $target
-     *
-     * @return Equipment
-     */
-    public function setTarget($target)
-    {
-        $this->target = $target;
-
-        return $this;
-    }
-
-    /**
-     * Get target
-     *
-     * @return string
-     */
-    public function getTarget()
-    {
-        return $this->target;
-    }
-
-    /**
      * Set author
      *
      * @param \CM\AccessBundle\Entity\User $author
@@ -290,5 +268,29 @@ class Equipment
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set target
+     *
+     * @param \CM\ConstructionBundle\Entity\Construction $target
+     *
+     * @return Equipment
+     */
+    public function setTarget(\CM\ConstructionBundle\Entity\Construction $target)
+    {
+        $this->target = $target;
+
+        return $this;
+    }
+
+    /**
+     * Get target
+     *
+     * @return \CM\ConstructionBundle\Entity\Construction
+     */
+    public function getTarget()
+    {
+        return $this->target;
     }
 }

@@ -21,3 +21,7 @@ construction_details:
 equipment_list:
     path: /equipment/list
     defaults: { _controller: ConstructionBundle:LoadEquipment:load }
+
+equipment_add:
+    path: /equipment/add
+    defaults: { _controller: ConstructionBundle:AddEquipment:AddEquipment }
