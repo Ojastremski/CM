@@ -1,6 +1,6 @@
 construction_homepage:
     path:     /constructions
-    defaults: { _controller: ConstructionBundle:LoadData:load }
+    defaults: { _controller: ConstructionBundle:LoadConstruction:load }
 
 construction_add:
     path: /construction/add
@@ -17,3 +17,7 @@ construction_delete:
 construction_details:
     path: /construction/details/{id}
     defaults: { _controller: ConstructionBundle:ShowDetails:ShowDetails }
+
+equipment_list:
+    path: /equipment/list
+    defaults: { _controller: ConstructionBundle:LoadEquipment:load }
