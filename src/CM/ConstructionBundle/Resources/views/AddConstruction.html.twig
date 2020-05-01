@@ -2,7 +2,7 @@
 
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionForm/*' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionForm.js' output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -16,7 +16,7 @@
                 {{ include('form/flash_messages.html.twig') }}
                 <h1>Tworzenie nowego objektu</h1>
                 {{ form_start(form) }}
-                    {{ form_row(form.constructionName) }}
+                    {{ form_row(form.constructionName, { 'id': 'my_custom_id' }) }}
                     {{ form_row(form.description) }}
                     {{ form_row(form.note) }}
                     {{ form_row(form.noteVisibility) }}

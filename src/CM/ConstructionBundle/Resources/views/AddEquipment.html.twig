@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentForm.js' output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container body-container">
+        <div class="row">
+            <div class="col-sm-9">
+                {{ include('form/flash_messages.html.twig') }}
+                <h1>Dodawanie nowego sprzętu </h1>
+                {{ form_start(form) }}
+                    {{ form_row(form.equipmentName) }}
+                    {{ form_row(form.equipmentSerialNumber) }}
+                    {{ form_row(form.equipmentCategory) }}
+                    {{ form_row(form.note) }}
+                    {{ form_row(form.noteVisibility) }}
+                    {{ form_row(form.publishedAt) }}
+                    <hr>
+                    {{ form_row(form.target) }}
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Dodaj
+                    </button>
+                    {{ form_widget(form.saveAndCreateNew, {label: 'Zapisz i dodaj kolejny', attr: {class: 'btn btn-primary'}}) }}
+                    <a href="{{ path('equipment_list') }}" class="btn btn-link">
+                        <i class="far fa-list-alt" aria-hidden="true"></i> Powrót do listy sprzętu
+                    </a>
+                {{ form_end(form) }}
+            </div>
+            <div id="sidebar" class="col-sm-3">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

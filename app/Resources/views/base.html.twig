@@ -36,6 +36,14 @@
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
+        {% javascripts '@AccessBundle/Resources/public/js/ConstructionList/*' output='js/compiled/main.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
+        {% javascripts '@AccessBundle/Resources/public/js/DateTimePicker/*' output='js/compiled/main.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
         {% block header %}
         {% endblock %}
    </head>

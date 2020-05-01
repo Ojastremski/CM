@@ -62,7 +62,9 @@ class Equipment
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=80, options={"default":"not_used"}, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Construction", fetch="EAGER")
+     * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
     */
-    private $target = "not_used";
+    private $target;
+
 }
