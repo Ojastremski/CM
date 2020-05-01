@@ -22,7 +22,6 @@ class AccessController extends Controller
             '_username'=> $lastUsername
         ]);
 
-
         return $this->render(
             '@Access/login/login.html.twig', 
             [

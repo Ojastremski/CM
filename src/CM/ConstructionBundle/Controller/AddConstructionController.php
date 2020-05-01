@@ -14,7 +14,7 @@ class AddConstructionController extends Controller
     public function AddConstructionAction(Request $request)
     {
         $construction = new Construction();
-        $construction->setAuthor($this->getUser()->getId());
+        $construction->setAuthor($this->getUser());
 
         $form = $this->createForm(ConstructionForm::class, $construction)
             ->add('saveAndCreateNew', SubmitType::class);

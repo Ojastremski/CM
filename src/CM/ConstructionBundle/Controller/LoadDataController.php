@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class LoadDataController extends Controller
 {
     public function loadAction()
-    {
+    {   
         $repository = $this->getDoctrine()->getRepository(Construction::class);
         $constructions = $repository->findAll();
 
