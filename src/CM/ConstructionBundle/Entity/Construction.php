@@ -35,12 +35,13 @@ class Construction
     private $publishedAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
     */
     private $modifiedAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="CM\AccessBundle\Entity\User", fetch="EAGER")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
     */
     private $author;
 
@@ -50,7 +51,7 @@ class Construction
     private $note;
 
     /**
-     * @ORM\Column(type="string", length=100, columnDefinition="enum('main', 'subpage', 'disabled')")
+     * @ORM\Column(type="string", nullable=true, columnDefinition="enum('main', 'subpage', 'disabled')")
     */
     private $noteVisibility;
 
@@ -161,30 +162,6 @@ class Construction
     }
 
     /**
-     * Set author
-     *
-     * @param integer $author
-     *
-     * @return Construction
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return integer
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set note
      *
      * @param string $note
@@ -230,5 +207,29 @@ class Construction
     public function getNoteVisibility()
     {
         return $this->noteVisibility;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \CM\AccessBundle\Entity\User $author
+     *
+     * @return Construction
+     */
+    public function setAuthor(\CM\AccessBundle\Entity\User $author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \CM\AccessBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }
