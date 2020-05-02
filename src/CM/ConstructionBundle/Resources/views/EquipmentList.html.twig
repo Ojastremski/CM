@@ -57,7 +57,7 @@
                                 {% if equipment.equipmentCategory == null %}
                                     <td>brak kategorii</td>
                                 {% else %}
-                                    <td>{{ equipment.equipmentCategory }}</td>
+                                    <td>{{ equipment.equipmentCategory.categoryName }}</td>
                                 {% endif %}
                                 <td>{{ equipment.equipmentSerialNumber }}</td>
                                 <td class="text-center">

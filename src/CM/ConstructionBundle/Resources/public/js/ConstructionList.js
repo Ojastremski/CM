@@ -15,4 +15,5 @@ $(document).ready(function() {
         var modal = $(this);
         modal.find('form #construction_id').val(constructionId);
     });
+
 });
