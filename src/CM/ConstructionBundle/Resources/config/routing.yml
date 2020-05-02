@@ -37,3 +37,7 @@ category_list:
 category_add:
     path: /category/add
     defaults: { _controller: ConstructionBundle:AddCategory:AddCategory }
+
+category_edit:
+    path: /category/edit/{id}
+    defaults: { _controller: ConstructionBundle:EditCategory:EditCategory }
