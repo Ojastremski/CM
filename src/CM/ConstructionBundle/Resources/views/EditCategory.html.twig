@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container body-container">
+        <div class="row">
+            <div class="col-sm-9">
+                {{ include('form/flash_messages.html.twig') }}
+                <h1>Edytuj objekt</h1>
+                {{ include('form/edit_template.html.twig', {
+                    form: form,
+                    button_label: 'Zapisz',
+                    include_back_to_home_link: true,
+                    home_path: 'category_list',
+                    text: 'Powrót do listy kategorii'
+                }, with_context = false) }}
+            </div>
+            <div id="sidebar" class="col-sm-3">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
