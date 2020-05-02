@@ -60,7 +60,7 @@ class AddConstructionController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $construction = $em->getRepository(Construction::class)
-            ->find($request->request->get('construction_id'));
+            ->find($request->request->get('element_id'));
         
         $em->remove($construction);
         $em->flush();

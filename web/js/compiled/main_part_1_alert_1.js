@@ -4,4 +4,13 @@ $(document).ready(function() {
             $(this).remove();
         });
     }, 2000);
+
+    $('#confirmationModal').on('show.bs.modal', function(event) {
+        var previousAction = $(event.relatedTarget);
+
+        var elementId = previousAction.attr('data-element-id');
+
+        var modal = $(this);
+        modal.find('form #element_id').val(elementId);
+    });
 });

@@ -51,4 +51,22 @@ class AddEquipmentController extends Controller
             ]
         );
     }
+
+    public function DeleteEquipmentAction(Request $request)
+    {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('equipment_list');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $equipment = $em->getRepository(Equipment::class)
+            ->find($request->request->get('element_id'));
+        
+        $em->remove($equipment);
+        $em->flush();
+
+        $this->addFlash('success', 'Sprzęt został usunięty!');
+
+        return $this->redirectToRoute('equipment_list');
+    }
 }

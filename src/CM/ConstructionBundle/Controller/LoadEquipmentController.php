@@ -25,11 +25,12 @@ class LoadEquipmentController extends Controller
     public function prepareNotes($equipments)
     {
         $notes = array();
-        foreach ($equipments as $equipment) 
+        foreach ($equipments as $key => $equipment) 
         {
             if ($equipment->getNoteVisibility() == "main")
             {
-                array_push($notes,$equipment->getNote());
+                $notes[$key]['subject'] = $equipment->getEquipmentName();
+                $notes[$key]['text'] = $equipment->getNote();
             }
         }
         return $notes;

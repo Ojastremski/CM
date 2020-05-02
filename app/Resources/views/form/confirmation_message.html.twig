@@ -1,11 +1,11 @@
 <div class="modal fade" id="confirmationModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ url('construction_delete') }}" method="post">
+            <form action="{{ url(path) }}" method="post">
                 <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
-                <input type="hidden" name="construction_id" id="construction_id" value="" />
+                <input type="hidden" name="element_id" id="element_id" value="" />
                 <div class="modal-body">
-                    <h4>Czy na pewno chcesz usunąć ten objekt?</h4>
+                    <h4>Czy na pewno chcesz usunąć ten {{subject}}?</h4>
                     <h6>Ta akcja nie może zostać cofnięta.</h6>
                 </div>
                 <div class="modal-footer">
@@ -13,7 +13,7 @@
                         <i class="fas fa-ban" aria-hidden="true"></i> Anuluj
                     </button>
                     <button type="submit" class="btn btn-sm btn-danger" id="btnYes">
-                        <i class="fas fa-trash-alt" aria-hidden="true"></i> Usuń objekt
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i> {{btnlabel}}
                     </button>
                 </div>
             </form>

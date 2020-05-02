@@ -12,7 +12,13 @@
     <div class="container body-container">
         <div class="row">
             <div id="main" class="col-sm-9">
-                {{ include('form/confirmation_message.html.twig') }}
+                {{ include('form/confirmation_message.html.twig', 
+                    {
+                        'path':'construction_delete',
+                        'subject':'objekt',
+                        'btnlabel': 'Usuń objekt'
+                    }) 
+                }}
                 <h1>{{ construction.constructionName }}</h1>
                 
                 <p class="post-metadata">
