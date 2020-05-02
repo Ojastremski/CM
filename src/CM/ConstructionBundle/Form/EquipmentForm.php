@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use CM\ConstructionBundle\Entity\Construction;
+use CM\ConstructionBundle\Entity\Category;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -35,16 +36,22 @@ class EquipmentForm extends AbstractType
                 ],
                 'label' => 'Nazwa sprzętu*'
             ])
-            ->add('equipmentCategory', TextType::class, [
+            ->add('equipmentCategory', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'categoryName',
+                'placeholder' => 'Wybierz kategorię',
+                'required' => false,
+                'label' => 'Kategoria'
+            ])
+            /*->add('equipmentCategory', TextType::class, [
                 'attr' => [
                     'maxlength' => '20'
                 ],
                 'constraints' => [
                     new Length(['min' => 2]),
                 ],
-                'label' => 'Kategoria',
                 'required' => false
-            ])
+            ])*/
             ->add('equipmentSerialNumber', TextType::class, [
                 'attr' => [
                     'maxlength' => '30'
