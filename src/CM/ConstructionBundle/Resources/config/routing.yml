@@ -29,3 +29,7 @@ equipment_add:
 equipment_delete:
     path: /equipment/delete
     defaults: { _controller: ConstructionBundle:AddEquipment:DeleteEquipment }
+
+category_list:
+    path: /category/list
+    defaults: { _controller: ConstructionBundle:LoadCategory:load }

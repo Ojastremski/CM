@@ -6,7 +6,6 @@ use CM\ConstructionBundle\Entity\Equipment;
 use CM\ConstructionBundle\Form\EquipmentForm;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AddEquipmentController extends Controller 
@@ -47,7 +46,8 @@ class AddEquipmentController extends Controller
             '@Construction/AddEquipment.html.twig', 
             [
                 'equipment' => $equipment,
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                 
             ]
         );
     }
