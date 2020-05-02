@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentList.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList.js' output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     
@@ -10,46 +10,33 @@
 {% block body %}
     <div class="container body-container">
         <div class="row">
-            <h1>Lista sprzętu</h1>
-            {% for note in notes %}
-                <div class="col-lg-4 col-md-4  col-sm-6 col-xs-12 alertDashBoard">
-                    <div class="alert alert-warning" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <strong>{{ note.subject }}</strong>
-                        <hr>
-                        <p>{{note.text}}</p>
-                    </div>
-                </div>
-            {% endfor %}
+            <h1>Lista kategorii</h1>
         </div> 
         <div class="row">
-            <div id="main" class="col-sm-12">
+            <div id="main" class="col-sm-7">
                 {{ include('form/confirmation_message.html.twig', 
                     {
                         'path':'equipment_delete',
-                        'subject':'sprzęt',
-                        'btnlabel': 'Usuń sprzęt'
+                        'subject':'kategorię',
+                        'btnlabel': 'Usuń kategorię'
                     }) 
                 }}
                 {{ include('form/flash_messages.html.twig') }}
                 
-                <a id="elementAdd" href="{{ path('equipment_add') }}" class="btn btn-block btn-sm btn-success">
-                    <i class="fas fa-plus" aria-hidden="true"></i> Nowy sprzęt
+                <a id="elementAdd" href="#" class="btn btn-block btn-sm btn-success">
+                    <i class="fas fa-plus" aria-hidden="true"></i> Nowa kategoria
                 </a>
                 <table id="scroll" class="table table-striped table-middle-aligned">
                     <thead>
                         <tr>
-                            <th scope="col">Nazwa <i class="fas fa-sort"></i></th>
                             <th scope="col">
                                 <i class="far fa-folder" aria-hidden="true"></i>
                                 Kategoria
                                 <i class="fas fa-sort"></i>
                             </th>
                             <th scope="col">
-                                <i class="fas fa-barcode" aria-hidden="true"></i>
-                                Nr. seryjny
+                                <i class="fas fa-eye" aria-hidden="true"></i>
+                                Widoczność
                                 <i class="fas fa-sort"></i>
                             </th>
                             <th scope="col" class="text-center">
@@ -59,22 +46,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for equipment in equipments %}
+                        {% for category in categories %}
                             <tr>
-                                <td>{{ equipment.equipmentName }}</td>
-                                {% if equipment.equipmentCategory == null %}
-                                    <td>brak kategorii</td>
+                                <td>{{ category.categoryName }}</td>
+                                {% if category.active == 1 %}
+                                    <td>Aktywna</td>
                                 {% else %}
-                                    <td>{{ equipment.equipmentCategory.categoryName }}</td>
+                                    <td>Nie aktywna</td>
                                 {% endif %}
-                                <td>{{ equipment.equipmentSerialNumber }}</td>
                                 <td class="text-center">
                                     <div class="item-actions">
                                         <a href="#" class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit" aria-hidden="true"></i>
                                             Edytuj
                                         </a>
-                                        <a data-element-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
+                                        <a data-element-id="{{category.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             Usuń
                                         </a>
@@ -83,13 +69,15 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="4" align="center">Brak sprzętu</td>
+                                <td colspan="4" align="center">Brak kategorii</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-
+            <div class="col-sm-5 form_toCategory">
+                <p style="text-align:center;">Hello world</p>
+            </div>
         </div>
     </div>
 {% endblock %}

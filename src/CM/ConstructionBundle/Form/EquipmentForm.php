@@ -43,15 +43,6 @@ class EquipmentForm extends AbstractType
                 'required' => false,
                 'label' => 'Kategoria'
             ])
-            /*->add('equipmentCategory', TextType::class, [
-                'attr' => [
-                    'maxlength' => '20'
-                ],
-                'constraints' => [
-                    new Length(['min' => 2]),
-                ],
-                'required' => false
-            ])*/
             ->add('equipmentSerialNumber', TextType::class, [
                 'attr' => [
                     'maxlength' => '30'
@@ -91,7 +82,6 @@ class EquipmentForm extends AbstractType
 
     public function preSetData(FormEvent $event) {
         $publishedAt = $event->getData()->getPublishedAt();
-
         $event
             ->getForm()            
             ->add('publishedAt', DateTimePickerType::class, [
