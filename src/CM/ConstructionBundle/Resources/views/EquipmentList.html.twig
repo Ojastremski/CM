@@ -17,14 +17,22 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        {{note}}
+                        <strong>{{ note.subject }}</strong>
+                        <hr>
+                        <p>{{note.text}}</p>
                     </div>
                 </div>
             {% endfor %}
         </div> 
         <div class="row">
             <div id="main" class="col-sm-12">
-                {{ include('form/confirmation_message.html.twig') }}
+                {{ include('form/confirmation_message.html.twig', 
+                    {
+                        'path':'equipment_delete',
+                        'subject':'sprzęt',
+                        'btnlabel': 'Usuń sprzęt'
+                    }) 
+                }}
                 {{ include('form/flash_messages.html.twig') }}
                 
                 <a id="equipmentAdd" href="{{ path('equipment_add') }}" class="btn btn-block btn-sm btn-success">
@@ -66,7 +74,7 @@
                                             <i class="fas fa-edit" aria-hidden="true"></i>
                                             Edytuj
                                         </a>
-                                        <a data-equipment-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
+                                        <a data-element-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             Usuń
                                         </a>

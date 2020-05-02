@@ -11,7 +11,13 @@
     <div class="container body-container">
         <div class="row">
             <div id="main" class="col-sm-9">
-                {{ include('form/confirmation_message.html.twig') }}
+                {{ include('form/confirmation_message.html.twig', 
+                    {
+                        'path':'construction_delete',
+                        'subject':'objekt',
+                        'btnlabel': 'Usuń objekt'
+                    }) 
+                }}
                 {{ include('form/flash_messages.html.twig') }}
                 <h1>Lista otwartych objektów budowlanych</h1>
                 <table id="scroll" class="table table-striped table-middle-aligned">
@@ -40,7 +46,7 @@
                                             <i class="fas fa-edit" aria-hidden="true"></i>
                                             Edytuj
                                         </a>
-                                        <a data-construction-id="{{construction.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
+                                        <a data-element-id="{{construction.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                             Usuń
                                         </a>

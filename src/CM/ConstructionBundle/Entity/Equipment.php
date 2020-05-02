@@ -26,7 +26,7 @@ class Equipment
     private $equipmentName;
     
     /**
-     * @ORM\ManyToOne(targetEntity="CM\ConstructionBundle\Entity\Category", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Category", fetch="EAGER")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
     */
     private $equipmentCategory;
@@ -63,7 +63,7 @@ class Equipment
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CM\ConstructionBundle\Entity\Construction", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Construction", fetch="EAGER")
      * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
     */
     private $target;
@@ -225,11 +225,11 @@ class Equipment
     /**
      * Set equipmentCategory
      *
-     * @param \CM\AccessBundle\Entity\Category $equipmentCategory
+     * @param \CM\ConstructionBundle\Entity\Category $equipmentCategory
      *
      * @return Equipment
      */
-    public function setEquipmentCategory(\CM\AccessBundle\Entity\Category $equipmentCategory = null)
+    public function setEquipmentCategory(\CM\ConstructionBundle\Entity\Category $equipmentCategory = null)
     {
         $this->equipmentCategory = $equipmentCategory;
 
@@ -239,7 +239,7 @@ class Equipment
     /**
      * Get equipmentCategory
      *
-     * @return \CM\AccessBundle\Entity\Category
+     * @return \CM\ConstructionBundle\Entity\Category
      */
     public function getEquipmentCategory()
     {
@@ -273,11 +273,11 @@ class Equipment
     /**
      * Set target
      *
-     * @param \CM\AccessBundle\Entity\Construction $target
+     * @param \CM\ConstructionBundle\Entity\Construction $target
      *
      * @return Equipment
      */
-    public function setTarget(\CM\AccessBundle\Entity\Construction $target = null)
+    public function setTarget(\CM\ConstructionBundle\Entity\Construction $target = null)
     {
         $this->target = $target;
 
@@ -287,7 +287,7 @@ class Equipment
     /**
      * Get target
      *
-     * @return \CM\AccessBundle\Entity\Construction
+     * @return \CM\ConstructionBundle\Entity\Construction
      */
     public function getTarget()
     {
