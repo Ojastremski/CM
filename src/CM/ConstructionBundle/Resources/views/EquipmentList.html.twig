@@ -28,9 +28,9 @@
             <div id="main" class="col-sm-12">
                 {{ include('form/confirmation_message.html.twig', 
                     {
-                        'path':'equipment_delete',
-                        'subject':'sprzęt',
-                        'btnlabel': 'Usuń sprzęt'
+                        path: 'equipment_delete',
+                        text: 'Czy na pewno chcesz usunąć ten sprzęt?',
+                        btnlabel: 'Usuń sprzęt'
                     }) 
                 }}
                 {{ include('form/flash_messages.html.twig') }}

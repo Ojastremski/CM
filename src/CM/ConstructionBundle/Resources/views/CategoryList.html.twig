@@ -16,9 +16,9 @@
             <div id="main" class="col-sm-7">
                 {{ include('form/confirmation_message.html.twig', 
                     {
-                        'path':'equipment_delete',
-                        'subject':'kategorię',
-                        'btnlabel': 'Usuń kategorię'
+                        path: 'category_delete',
+                        text: 'Czy na pewno chcesz usunąć tę kategorię?',
+                        btnlabel: 'Usuń kategorię'
                     }) 
                 }}
                 {{ include('form/flash_messages.html.twig') }}
