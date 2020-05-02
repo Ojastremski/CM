@@ -44,4 +44,21 @@ class AddCategoryController extends Controller
             ]
         );
     }
+    public function DeleteCategoryAction(Request $request)
+    {
+        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
+            return $this->redirectToRoute('category_list');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)
+            ->find($request->request->get('element_id'));
+        
+        $em->remove($category);
+        $em->flush();
+
+        $this->addFlash('success', 'Kategoria została usunięta!');
+
+        return $this->redirectToRoute('category_list');
+    }
 }

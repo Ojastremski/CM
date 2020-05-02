@@ -41,3 +41,7 @@ category_add:
 category_edit:
     path: /category/edit/{id}
     defaults: { _controller: ConstructionBundle:EditCategory:EditCategory }
+
+category_delete:
+    path: /category/delete
+    defaults: { _controller: ConstructionBundle:AddCategory:DeleteCategory }
