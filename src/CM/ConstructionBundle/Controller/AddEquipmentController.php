@@ -29,6 +29,12 @@ class AddEquipmentController extends Controller
                 $equipment->setNoteVisibility($request->request->get('equipment_form')['noteVisibility']);
             }
 
+            if($equipment->getTarget())
+            {
+                date_default_timezone_set("Europe/Warsaw");
+                $equipment->setAssignmentDate(new \DateTime(date("Y-m-d H:i:s")));
+            }
+
             $em->persist($equipment);
             $em->flush();
 

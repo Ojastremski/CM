@@ -8,9 +8,10 @@
     font-size: 15px
 }
 
-#elementAdd {
+#elementAdd,
+#assignparam {
     float: right;
-    margin-bottom: 5px;
+    margin: 0 0 5px 5px;
 }
 
 .btn-success {

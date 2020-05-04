@@ -32,7 +32,7 @@ class Equipment
     private $equipmentCategory;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=false)
+     * @ORM\Column(type="string", length=30, nullable=true)
     */
     private $equipmentSerialNumber;
 
@@ -67,6 +67,17 @@ class Equipment
      * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
     */
     private $target;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+    */
+    private $recipient;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+    */
+    private $assignmentDate;
+
 
     /**
      * Get id
@@ -220,6 +231,54 @@ class Equipment
     public function getModifiedAt()
     {
         return $this->modifiedAt;
+    }
+
+    /**
+     * Set recipient
+     *
+     * @param string $recipient
+     *
+     * @return Equipment
+     */
+    public function setRecipient($recipient)
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * Get recipient
+     *
+     * @return string
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
+    }
+
+    /**
+     * Set assignmentDate
+     *
+     * @param \DateTime $assignmentDate
+     *
+     * @return Equipment
+     */
+    public function setAssignmentDate($assignmentDate)
+    {
+        $this->assignmentDate = $assignmentDate;
+
+        return $this;
+    }
+
+    /**
+     * Get assignmentDate
+     *
+     * @return \DateTime
+     */
+    public function getAssignmentDate()
+    {
+        return $this->assignmentDate;
     }
 
     /**
