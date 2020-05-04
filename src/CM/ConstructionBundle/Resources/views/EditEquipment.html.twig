@@ -2,7 +2,7 @@
 
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionForm.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentForm.js' output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -14,13 +14,13 @@
         <div class="row">
             <div class="col-sm-9">
                 {{ include('form/flash_messages.html.twig') }}
-                <h1>Edytuj obiekt</h1>
+                <h1>Edytuj sprzęt</h1>
                 {{ include('form/edit_template.html.twig', {
                     form: form,
                     button_label: 'Zapisz',
                     include_back_to_home_link: true,
-                    home_path: 'construction_homepage',
-                    text: 'Powrót do listy obiektów'
+                    home_path: 'equipment_list',
+                    text: 'Powrót do listy sprzętu'
                 }, with_context = false) }}
             </div>
             <div id="sidebar" class="col-sm-3">

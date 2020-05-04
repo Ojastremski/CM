@@ -27,7 +27,7 @@ class EditCategoryController extends Controller
             '@Construction/EditCategory.html.twig', 
             [
             'category' => $category,
-            'form' => $form->createView(),
+            'form' => $form->createView()
             ]
         );
     }

@@ -51,11 +51,11 @@ class EquipmentForm extends AbstractType
                     new NotBlank(),
                     new Length(['min' => 2]),
                 ],
-                'label' => 'Nr. seryjny*'
+                'label' => 'Nr. seryjny'
             ])
             ->add('note', TextareaType::class, [
                 'attr' => [
-                    'maxlength' => '100'
+                    'maxlength' => '100',
                 ],
                 'label' => 'Notatka',
                 'required' => false
@@ -75,6 +75,16 @@ class EquipmentForm extends AbstractType
                 'placeholder' => 'Wybierz budowę',
                 'required' => false,
                 'label' => 'Wydanie na budowę'
+            ])
+            ->add('recipient', TextType::class, [
+                'attr' => [
+                    'maxlength' => '30'
+                ],
+                'constraints' => [
+                    new Length(['min' => 3])
+                ],
+                'required' => false,
+                'label' => 'Odbiorca'
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, [$this, 'preSetData'])
         ;

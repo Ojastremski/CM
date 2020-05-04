@@ -14,12 +14,12 @@
                 {{ include('form/confirmation_message.html.twig', 
                     {
                         path: 'construction_delete',
-                        text: 'Czy na pewno chcesz usunąć ten objekt?',
-                        btnlabel: 'Usuń objekt'
+                        text: 'Czy na pewno chcesz usunąć ten obiekt?',
+                        btnlabel: 'Usuń obiekt'
                     }) 
                 }}
                 {{ include('form/flash_messages.html.twig') }}
-                <h1>Lista otwartych objektów budowlanych</h1>
+                <h1>Lista otwartych obiektów budowlanych</h1>
                 <table id="scroll" class="table table-striped table-middle-aligned">
                     <thead>
                         <tr>
@@ -55,7 +55,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="4" align="center">Brak objektów</td>
+                                <td colspan="4" align="center">Brak obiektów</td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -64,7 +64,7 @@
             <div id="sidebar" class="col-sm-3">
                 <div class="section actions">
                     <a href="{{ path('construction_add') }}" class="btn btn-block btn-lg btn-success">
-                        <i class="fas fa-plus" aria-hidden="true"></i> Nowy objekt
+                        <i class="fas fa-plus" aria-hidden="true"></i> Nowy obiekt
                     </a>
                 </div>
             </div>

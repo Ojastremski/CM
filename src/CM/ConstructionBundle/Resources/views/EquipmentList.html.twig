@@ -34,62 +34,77 @@
                     }) 
                 }}
                 {{ include('form/flash_messages.html.twig') }}
-                
                 <a id="elementAdd" href="{{ path('equipment_add') }}" class="btn btn-block btn-sm btn-success">
                     <i class="fas fa-plus" aria-hidden="true"></i> Nowy sprzęt
                 </a>
-                <table id="scroll" class="table table-striped table-middle-aligned">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nazwa <i class="fas fa-sort"></i></th>
-                            <th scope="col">
-                                <i class="far fa-folder" aria-hidden="true"></i>
-                                Kategoria
-                                <i class="fas fa-sort"></i>
-                            </th>
-                            <th scope="col">
-                                <i class="fas fa-barcode" aria-hidden="true"></i>
-                                Nr. seryjny
-                                <i class="fas fa-sort"></i>
-                            </th>
-                            <th scope="col" class="text-center">
-                                <i class="fas fa-cogs" aria-hidden="true"></i>
-                                Akcje
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for equipment in equipments %}
+                {{ form_start(form) }}
+                    <div class="row" >
+                        <div id="assignForm" class="col-sm-12">
+                            {{ form_row(form.allCategory) }}
+                            {{ form_row(form.allConstruction) }}
+                            {{ form_row(form.recipient) }}
+                            <button type="submit" class="btn btn-sm btn-default" id="assignparam" style="display:none;">
+                                <i class="far fa-check-circle" aria-hidden="true"></i>
+                                Zatwierdź
+                            </button>
+                        </div>
+                    </div>
+                    <table id="scroll" class="table table-striped table-middle-aligned">
+                        <thead>
                             <tr>
-                                <td>{{ equipment.equipmentName }}</td>
-                                {% if equipment.equipmentCategory == null %}
-                                    <td>brak kategorii</td>
-                                {% else %}
-                                    <td>{{ equipment.equipmentCategory.categoryName }}</td>
-                                {% endif %}
-                                <td>{{ equipment.equipmentSerialNumber }}</td>
-                                <td class="text-center">
-                                    <div class="item-actions">
-                                        <a href="#" class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit" aria-hidden="true"></i>
-                                            Edytuj
-                                        </a>
-                                        <a data-element-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash-alt" aria-hidden="true"></i>
-                                            Usuń
-                                        </a>
-                                    </div>
-                                </td>
+                                <th scope="col"></th>
+                                <th scope="col">Nazwa <i class="fas fa-sort"></i></th>
+                                <th scope="col">
+                                    <i class="far fa-folder" aria-hidden="true"></i>
+                                    Kategoria
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th scope="col">
+                                    <i class="fas fa-barcode" aria-hidden="true"></i>
+                                    Nr. seryjny
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th scope="col" class="text-center">
+                                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                                    Akcje
+                                </th>
                             </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="4" align="center">Brak sprzętu</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for equipment in  equipments %}
+                                <tr>
+                                    <td>
+                                    {{ form_row(form.checkbox[equipment.id], {'attr': {'class': 'checkedrow'}})}}
+                                    </td>
+                                    <td>{{ equipment.equipmentName }}</td>
+                                    {% if equipment.equipmentCategory == null %}
+                                        <td>brak kategorii</td>
+                                    {% else %}
+                                        <td>{{ equipment.equipmentCategory.categoryName }}</td>
+                                    {% endif %}
+                                    <td>{{ equipment.equipmentSerialNumber }}</td>
+                                    <td class="text-center">
+                                        <div class="item-actions">
+                                            <a href="{{ path('equipment_edit', {id: equipment.id}) }}" class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit" aria-hidden="true"></i>
+                                                Edytuj
+                                            </a>
+                                            <a data-element-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                                Usuń
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" align="center">Brak sprzętu</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {{ form_end(form) }}
             </div>
-
         </div>
     </div>
 {% endblock %}

@@ -26,6 +26,10 @@ equipment_add:
     path: /equipment/add
     defaults: { _controller: ConstructionBundle:AddEquipment:AddEquipment }
 
+equipment_edit:
+    path: /equipment/edit/{id}
+    defaults: { _controller: ConstructionBundle:EditEquipment:EditEquipment }
+
 equipment_delete:
     path: /equipment/delete
     defaults: { _controller: ConstructionBundle:AddEquipment:DeleteEquipment }
