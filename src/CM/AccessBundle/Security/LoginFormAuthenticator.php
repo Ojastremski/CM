@@ -5,6 +5,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use CM\AccessBundle\Entity\User;
 use CM\AccessBundle\Form\LoginForm;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
@@ -19,12 +20,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     private $formFactory;
     private $em;
+    private $passwordEncoder;
 
-    public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface  $em, RouterInterface $router)
+    public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface  $em, RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->formFactory = $formFactory;
         $this->em = $em;
         $this->router = $router;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function getCredentials(Request $request)
@@ -32,7 +35,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $isLoginSubmit = $request->getPathInfo() == '/login' && $request->isMethod('POST');
 
         if (!$isLoginSubmit) {
-            // skip authentication
             return;
         }
 
@@ -65,7 +67,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $password = $credentials['_password'];
 
-        if ($password == 'olko') {
+        if ($this->passwordEncoder->isPasswordValid($user, $password)) {
             return true;
         }
 

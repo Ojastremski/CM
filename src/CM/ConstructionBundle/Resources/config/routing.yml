@@ -17,6 +17,7 @@ construction_delete:
 construction_details:
     path: /construction/details/{id}
     defaults: { _controller: ConstructionBundle:ShowDetails:ShowDetails }
+    methods: GET
 
 equipment_list:
     path: /equipment/list
@@ -34,6 +35,10 @@ equipment_delete:
     path: /equipment/delete
     defaults: { _controller: ConstructionBundle:AddEquipment:DeleteEquipment }
 
+equipment_details:
+    path: /equipment/details/{id}
+    defaults: { _controller: ConstructionBundle:LoadEquipment:EquipmentDetails }
+
 category_list:
     path: /category/list
     defaults: { _controller: ConstructionBundle:LoadCategory:load }
@@ -49,3 +54,8 @@ category_edit:
 category_delete:
     path: /category/delete
     defaults: { _controller: ConstructionBundle:AddCategory:DeleteCategory }
+
+update_assigned_equipment:
+    path: /construction/details/{id}
+    defaults: { _controller: ConstructionBundle:ShowDetails:UpdateAssignedEquipment }
+    methods: POST

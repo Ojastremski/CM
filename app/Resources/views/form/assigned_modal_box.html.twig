@@ -1,0 +1,23 @@
+<div class="modal fade" id="editAssignedEquipment{{index}}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            {{ form_start(form, {
+                    'method': 'POST',
+                    'action': url('update_assigned_equipment', {'id': eq[index - 1].id }),
+                })
+            }}
+                <div class="modal-body">
+                    {{ form_row(form.target) }}
+                    {{ form_row(form.owner) }}
+                    {{ form_row(form.recipient) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save" aria-hidden="true"></i>
+                        Przypisz
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

@@ -6,6 +6,9 @@ security:
     providers:
         users:
             entity: { class: CM\AccessBundle\Entity\User, property: username }
+    
+    encoders:
+        CM\AccessBundle\Entity\User: bcrypt
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -24,4 +27,7 @@ security:
                 target: /login
 
     access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/registration, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/page, roles: ROLE_USER }
+        - { path: ^/, roles: ROLE_USER }

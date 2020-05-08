@@ -1,7 +1,5 @@
 {% block header %}
-    {% stylesheets '@AccessBundle/Resources/public/css/app/menu.css'%}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+
 {% endblock %}
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -29,7 +27,9 @@
                 </a>
             </li>
             <li>
-                <a href="#"> <i class="fa fa-search"></i> Wyszukaj</a>
+                <a href="{{ path('category_list') }}">
+                    <i class="far fa-folder" aria-hidden="true"></i> Kategorie
+                </a>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
@@ -50,20 +50,6 @@
                                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i> Wyloguj się
                             </a>
                         {% endif %}
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="locales">
-                    <i class="fab fa-creative-commons-nd" aria-hidden="true"></i>
-                    <span class="caret"></span>
-                    <span class="sr-only">Opcje</span>
-                </a>
-                <ul class="dropdown-menu option" role="menu" aria-labelledby="option">
-                    <li>
-                        <a href="{{ path('category_list') }}">
-                            <i class="far fa-folder" aria-hidden="true"></i> Kategorie
-                        </a>
                     </li>
                 </ul>
             </li>

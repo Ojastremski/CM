@@ -13,7 +13,11 @@ class EditEquipmentController extends Controller
 {
     public function EditEquipmentAction(Request $request, Equipment $equipment)
     {
-        $oldVar = $equipment->getTarget()->getId();
+        if ($equipment->getTarget())
+        {
+            $oldVar = $equipment->getTarget()->getId();
+        }
+        
         $form = $this->createForm(EquipmentForm::class, $equipment);
         $form->handleRequest($request);
 
@@ -28,13 +32,15 @@ class EditEquipmentController extends Controller
             }
 
             date_default_timezone_set("Europe/Warsaw");
-            $newVar = $equipment->getTarget()->getId();
-
-            if ($newVar != $oldVar)
+            if ($equipment->getTarget())
             {
-                $equipment->setAssignmentDate(new \DateTime(date("Y-m-d H:i:s")));
+                $newVar = $equipment->getTarget()->getId();
+                if ($newVar != $oldVar)
+                {
+                    $equipment->setAssignmentDate(new \DateTime(date("Y-m-d H:i:s")));
+                }
             }
-
+            
             $equipment->setModifiedAt(new \DateTime(date("Y-m-d H:i:s")));
 
             $this->getDoctrine()->getManager()->flush();

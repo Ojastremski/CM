@@ -1,0 +1,46 @@
+<?php
+
+namespace CM\ConstructionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CM\ConstructionBundle\Entity
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="History")
+ */
+class History
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    private $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Equipment", mappedBy="histories", fetch="EAGER")
+     */
+    private $equipments;
+
+    /**
+     * @ORM\Column(type="string", length=1024, nullable=false)
+    */
+    private $message;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+    */
+    private $recipient;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+    */
+    private $owner;
+
+    /**
+     * @ORM\Column(type="datetime")
+    */
+    private $date;
+}

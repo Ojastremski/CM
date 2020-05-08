@@ -2,7 +2,7 @@
 
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -19,6 +19,15 @@
                         btnlabel: 'Usuń objekt'
                     }) 
                 }}
+                {% for form in forms %}
+                    {{ include('form/assigned_modal_box.html.twig', 
+                        {
+                            form: form,
+                            index: loop.index,
+                            eq: allocated_equipments
+                        }) 
+                    }}
+                {% endfor %}
                 <h1>{{ construction.constructionName }}</h1>
                 
                 <p class="post-metadata">
@@ -41,9 +50,11 @@
                     </div>
                 {% endif %}
 
-                <div class="well">
-                    <p>{{ construction.description }}</p>
-                </div>
+                {% if construction.description != null %}
+                    <div class="well">
+                        <p>{{ construction.description }}</p>
+                    </div>
+                {% endif %}
             </div>
             <div id="sidebar" class="col-sm-3">
                 <div class="section actions">
@@ -52,7 +63,7 @@
                     </a>
                 </div>
                 <div class="section actions">
-                    <a data-construction-id="{{construction.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-lg btn-block btn-danger">
+                    <a data-element-id="{{construction.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-lg btn-block btn-danger">
                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
                         Usuń
                     </a>
@@ -67,8 +78,18 @@
                         <tr>
                             <th scope="col">Nazwa <i class="fas fa-sort"></i></th>
                             <th scope="col">
+                                <i class="fas fa-barcode" aria-hidden="true"></i>
+                                Nr. seryjny
+                                <i class="fas fa-sort"></i>
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                Odbiorca
+                                <i class="fas fa-sort"></i>
+                            </th>
+                            <th scope="col">
                                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                                Dodano
+                                Przypisano
                                 <i class="fas fa-sort"></i>
                             </th>
                             <th scope="col" class="text-center">
@@ -81,10 +102,12 @@
                         {% for allocated_equipment in allocated_equipments %}
                             <tr>
                                 <td>{{ allocated_equipment.equipmentName }}</td>
-                                <td>{{ allocated_equipment.modifiedAt|localizeddate('medium', 'short', null, 'UTC') }}</td>
+                                <td>{{ allocated_equipment.equipmentSerialNumber }}</td>
+                                <td>{{ allocated_equipment.recipient }}</td>
+                                <td>{{ allocated_equipment.assignmentDate|localizeddate('medium', 'short', null, 'UTC') }}</td>
                                 <td class="text-center">
                                     <div class="item-actions">
-                                        <a href="#" class="btn btn-sm btn-primary">
+                                        <a data-toggle="modal" href="#editAssignedEquipment{{loop.index}}" class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit" aria-hidden="true"></i>
                                             Edytuj
                                         </a>
@@ -93,7 +116,7 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="4" align="center">Brak przydzielonych sprzętów</td>
+                                <td colspan="5" align="center">Brak przydzielonych sprzętów</td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="flex-container">
+        <div class="row">
+            <div class="box">
+                {{ form_start(form) }}
+                    <fieldset>
+                        <legend>
+                            <i class="fas fa-user-plus" aria-hidden="true"></i>
+                            Rejestracja
+                        </legend>
+                        {{ form_row(form.firstname) }}
+                        {{ form_row(form.lastname) }}
+                        {{ form_row(form._username) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.plainPassword.first, {
+                            'label': 'Podaj hasło*'
+                        }) }}
+                        {{ form_row(form.plainPassword.second, {
+                            'label': 'Powtórz hasło*'
+                        }) }}
+                        <button type="submit" class="btn btn-primary">Załóż konto <i class="far fa-check-circle"></i></button>
+                    </fieldset>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

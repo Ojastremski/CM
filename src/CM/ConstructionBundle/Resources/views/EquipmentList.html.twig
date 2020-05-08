@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentList.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentList.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     
 {% endblock %}
 
 {% block body %}
-    <div class="container body-container">
+    <div class="container body-container" style="width:99%">
         <div class="row">
             <h1>Lista sprzętu</h1>
             {% for note in notes %}
@@ -42,6 +42,7 @@
                         <div id="assignForm" class="col-sm-12">
                             {{ form_row(form.allCategory) }}
                             {{ form_row(form.allConstruction) }}
+                            {{ form_row(form.owner) }}
                             {{ form_row(form.recipient) }}
                             <button type="submit" class="btn btn-sm btn-default" id="assignparam" style="display:none;">
                                 <i class="far fa-check-circle" aria-hidden="true"></i>
@@ -64,6 +65,16 @@
                                     Nr. seryjny
                                     <i class="fas fa-sort"></i>
                                 </th>
+                                <th scope="col">
+                                    <i class="fas fa-city" aria-hidden="true"></i>
+                                    Przydział
+                                    <i class="fas fa-sort"></i>
+                                </th>
+                                <th scope="col">
+                                    <i class="fas fa-users" aria-hidden="true"></i>
+                                    Odbiorca
+                                    <i class="fas fa-sort"></i>
+                                </th>
                                 <th scope="col" class="text-center">
                                     <i class="fas fa-cogs" aria-hidden="true"></i>
                                     Akcje
@@ -76,13 +87,27 @@
                                     <td>
                                     {{ form_row(form.checkbox[equipment.id], {'attr': {'class': 'checkedrow'}})}}
                                     </td>
-                                    <td>{{ equipment.equipmentName }}</td>
+                                    <td><a href="{{ path('equipment_details', {id: equipment.id}) }}">{{ equipment.equipmentName }}</a></td>
                                     {% if equipment.equipmentCategory == null %}
                                         <td>brak kategorii</td>
                                     {% else %}
                                         <td>{{ equipment.equipmentCategory.categoryName }}</td>
                                     {% endif %}
-                                    <td>{{ equipment.equipmentSerialNumber }}</td>
+                                    {% if equipment.equipmentSerialNumber == null %}
+                                        <td>brak</td>
+                                    {% else %}
+                                        <td>{{ equipment.equipmentSerialNumber }}</td>
+                                    {% endif %}
+                                    {% if equipment.target == null %}
+                                        <td>magazyn</td>
+                                    {% else %}  
+                                        <td>{{ equipment.target.constructionName }}</td>
+                                    {% endif %}
+                                    {% if equipment.recipient == null %}
+                                        <td>brak</td>
+                                    {% else %}  
+                                        <td>{{ equipment.recipient }}</td>
+                                    {% endif %}
                                     <td class="text-center">
                                         <div class="item-actions">
                                             <a href="{{ path('equipment_edit', {id: equipment.id}) }}" class="btn btn-sm btn-primary">
@@ -98,7 +123,7 @@
                                 </tr>
                             {% else %}
                                 <tr>
-                                    <td colspan="4" align="center">Brak sprzętu</td>
+                                    <td colspan="6" align="center">Brak sprzętu</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
