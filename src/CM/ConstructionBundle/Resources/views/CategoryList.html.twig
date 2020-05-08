@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/ConstructionList.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     
@@ -74,9 +74,6 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="col-sm-5 form_toCategory">
-                <p style="text-align:center;">Hello world</p>
             </div>
         </div>
     </div>

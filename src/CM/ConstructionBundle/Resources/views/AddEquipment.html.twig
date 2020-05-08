@@ -2,7 +2,7 @@
 
 {% block header %}
 
-    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentForm.js' output='js/compiled/main.js' %}
+    {% javascripts '@ConstructionBundle/Resources/public/js/EquipmentForm.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 
@@ -24,6 +24,7 @@
                     {{ form_row(form.publishedAt) }}
                     <hr>
                     {{ form_row(form.target) }}
+                    {{ form_row(form.owner, {'attr': {'disabled': 'disabled'}}) }}
                     {{ form_row(form.recipient) }}
                     
                     <button type="submit" class="btn btn-primary">

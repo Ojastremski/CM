@@ -16,31 +16,31 @@
 
         <title>CM - Construction Management</title>
         
-        {% stylesheets '@AccessBundle/Resources/public/css/bootstrap/*' output='css/compiled/main.css' %}
+        {% stylesheets '@AccessBundle/Resources/public/css/bootstrap/*' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        {% stylesheets '@AccessBundle/Resources/public/css/fontawesome/*' output='css/compiled/main.css' %}
+        {% stylesheets '@AccessBundle/Resources/public/css/fontawesome/*' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        {% stylesheets '@AccessBundle/Resources/public/css/app/style.css'%}
+        {% stylesheets '@AccessBundle/Resources/public/css/app/*' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        {% stylesheets '@ConstructionBundle/Resources/public/css/bootstrap-datetimepicker.css' output='css/compiled/main.css' %}
+        {% stylesheets '@ConstructionBundle/Resources/public/css/bootstrap-datetimepicker.css' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
 
-        {% javascripts '@AccessBundle/Resources/public/js/bootstrap/*' output='js/compiled/main.js' %}
+        {% javascripts '@AccessBundle/Resources/public/js/bootstrap/*' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
-        {% javascripts '@AccessBundle/Resources/public/js/ConstructionList/*' output='js/compiled/main.js' %}
+        {% javascripts '@AccessBundle/Resources/public/js/ConstructionList/*' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
-        {% javascripts '@AccessBundle/Resources/public/js/DateTimePicker/*' output='js/compiled/main.js' %}
+        {% javascripts '@AccessBundle/Resources/public/js/DateTimePicker/*' %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 

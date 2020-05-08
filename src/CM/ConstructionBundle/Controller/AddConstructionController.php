@@ -3,10 +3,11 @@
 namespace CM\ConstructionBundle\Controller;
 
 use CM\ConstructionBundle\Entity\Construction;
+use CM\ConstructionBundle\Entity\Equipment;
+use CM\ConstructionBundle\Entity\History;
 use CM\ConstructionBundle\Form\ConstructionForm;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AddConstructionController extends Controller 
@@ -25,9 +26,10 @@ class AddConstructionController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
 
-            if ($construction->getNote())
-            {
-                $construction->setNoteVisibility($request->request->get('construction_form')['noteVisibility']);
+            if ($construction->getNote()) {
+                $construction->setNoteVisibility(
+                    $request->request->get('construction_form')['noteVisibility']
+                );
             }
             
             $em->persist($construction);
@@ -35,12 +37,9 @@ class AddConstructionController extends Controller
 
             $this->addFlash('success', 'Objekt został dodany!');
 
-            if ($form->get('saveAndCreateNew')->isClicked()) 
-            {
-                return $this->redirectToRoute('construction_add');
-            }
-
-            return $this->redirectToRoute('construction_homepage');
+            return $form->get('saveAndCreateNew')->isClicked()  
+                ? $this->redirectToRoute('construction_add')
+                : $this->redirectToRoute('construction_homepage');
         }
 
         return $this->render(
@@ -54,13 +53,31 @@ class AddConstructionController extends Controller
 
     public function DeleteConstructionAction(Request $request)
     {
-        if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
-            return $this->redirectToRoute('construction_homepage');
-        }
+        date_default_timezone_set("Europe/Warsaw");
 
         $em = $this->getDoctrine()->getManager();
+        
         $construction = $em->getRepository(Construction::class)
             ->find($request->request->get('element_id'));
+
+        $allocatedEquipments = $this->getDoctrine()->getRepository(Equipment::class)->findBy(
+                ['target' => $request->request->get('element_id')]
+        );
+
+        foreach ($allocatedEquipments as $key => $value){
+            $history = new History();
+            $history->setMessage("Sprzęt został przeniesiony do magazynu");
+            $history->setDate(new \DateTime());
+            $this->getDoctrine()->getManager()->flush();
+            
+            $value->setAssignmentDate(new \DateTime());
+            $value->setTarget(null);
+            $value->setRecipient(null);
+            $value->setOwner(null);
+            $value->addHistory($history);
+
+            $this->getDoctrine()->getManager()->flush();
+        }
         
         $em->remove($construction);
         $em->flush();

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CM\ConstructionBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="Category")
+ * @ORM\Table(name="category")
  */
 class Category
 {
@@ -29,23 +29,12 @@ class Category
     */
     private $active;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
+    
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set categoryName
-     *
-     * @param string $categoryName
-     *
-     * @return Category
-     */
     public function setCategoryName($categoryName)
     {
         $this->categoryName = $categoryName;
@@ -53,23 +42,11 @@ class Category
         return $this;
     }
 
-    /**
-     * Get categoryName
-     *
-     * @return string
-     */
     public function getCategoryName()
     {
         return $this->categoryName;
     }
 
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     *
-     * @return Category
-     */
     public function setActive($active)
     {
         $this->active = $active;
@@ -77,11 +54,6 @@ class Category
         return $this;
     }
 
-    /**
-     * Get active
-     *
-     * @return boolean
-     */
     public function getActive()
     {
         return $this->active;

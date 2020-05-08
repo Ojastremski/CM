@@ -2,14 +2,14 @@
 
 namespace CM\ConstructionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
 
 /**
  * CM\ConstructionBundle\Entity
  *
  * @ORM\Entity
- * @ORM\Table(name="Equipment")
+ * @ORM\Table(name="equipment")
  */
 class Equipment
 {
@@ -27,7 +27,7 @@ class Equipment
     
     /**
      * @ORM\ManyToOne(targetEntity="Category", fetch="EAGER")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
     */
     private $equipmentCategory;
 
@@ -58,13 +58,13 @@ class Equipment
 
     /**
      * @ORM\ManyToOne(targetEntity="CM\AccessBundle\Entity\User", fetch="EAGER")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
     */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Construction", fetch="EAGER")
-     * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="construction_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
     */
     private $target;
 
@@ -74,28 +74,33 @@ class Equipment
     private $recipient;
 
     /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+    */
+    private $owner;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="History", inversedBy="equipments", fetch="EAGER", cascade={"persist"})
+     * @ORM\JoinTable(name="equipment_history")
+    */
+    private $histories;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
     */
     private $assignmentDate;
-
-
     /**
-     * Get id
-     *
-     * @return integer
+     * Constructor
      */
+    public function __construct()
+    {
+        $this->histories = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set equipmentName
-     *
-     * @param string $equipmentName
-     *
-     * @return Equipment
-     */
     public function setEquipmentName($equipmentName)
     {
         $this->equipmentName = $equipmentName;
@@ -103,23 +108,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get equipmentName
-     *
-     * @return string
-     */
     public function getEquipmentName()
     {
         return $this->equipmentName;
     }
 
-    /**
-     * Set equipmentSerialNumber
-     *
-     * @param string $equipmentSerialNumber
-     *
-     * @return Equipment
-     */
     public function setEquipmentSerialNumber($equipmentSerialNumber)
     {
         $this->equipmentSerialNumber = $equipmentSerialNumber;
@@ -127,23 +120,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get equipmentSerialNumber
-     *
-     * @return string
-     */
     public function getEquipmentSerialNumber()
     {
         return $this->equipmentSerialNumber;
     }
 
-    /**
-     * Set note
-     *
-     * @param string $note
-     *
-     * @return Equipment
-     */
     public function setNote($note)
     {
         $this->note = $note;
@@ -151,23 +132,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get note
-     *
-     * @return string
-     */
     public function getNote()
     {
         return $this->note;
     }
 
-    /**
-     * Set noteVisibility
-     *
-     * @param string $noteVisibility
-     *
-     * @return Equipment
-     */
     public function setNoteVisibility($noteVisibility)
     {
         $this->noteVisibility = $noteVisibility;
@@ -175,23 +144,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get noteVisibility
-     *
-     * @return string
-     */
     public function getNoteVisibility()
     {
         return $this->noteVisibility;
     }
 
-    /**
-     * Set publishedAt
-     *
-     * @param \DateTime $publishedAt
-     *
-     * @return Equipment
-     */
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
@@ -199,23 +156,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get publishedAt
-     *
-     * @return \DateTime
-     */
     public function getPublishedAt()
     {
         return $this->publishedAt;
     }
 
-    /**
-     * Set modifiedAt
-     *
-     * @param \DateTime $modifiedAt
-     *
-     * @return Equipment
-     */
     public function setModifiedAt($modifiedAt)
     {
         $this->modifiedAt = $modifiedAt;
@@ -223,23 +168,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get modifiedAt
-     *
-     * @return \DateTime
-     */
     public function getModifiedAt()
     {
         return $this->modifiedAt;
     }
 
-    /**
-     * Set recipient
-     *
-     * @param string $recipient
-     *
-     * @return Equipment
-     */
     public function setRecipient($recipient)
     {
         $this->recipient = $recipient;
@@ -247,23 +180,11 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get recipient
-     *
-     * @return string
-     */
     public function getRecipient()
     {
         return $this->recipient;
     }
 
-    /**
-     * Set assignmentDate
-     *
-     * @param \DateTime $assignmentDate
-     *
-     * @return Equipment
-     */
     public function setAssignmentDate($assignmentDate)
     {
         $this->assignmentDate = $assignmentDate;
@@ -271,47 +192,23 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get assignmentDate
-     *
-     * @return \DateTime
-     */
     public function getAssignmentDate()
     {
         return $this->assignmentDate;
     }
 
-    /**
-     * Set equipmentCategory
-     *
-     * @param \CM\ConstructionBundle\Entity\Category $equipmentCategory
-     *
-     * @return Equipment
-     */
-    public function setEquipmentCategory(\CM\ConstructionBundle\Entity\Category $equipmentCategory = null)
+    public function setEquipmentCategory(Category $equipmentCategory = null)
     {
         $this->equipmentCategory = $equipmentCategory;
 
         return $this;
     }
 
-    /**
-     * Get equipmentCategory
-     *
-     * @return \CM\ConstructionBundle\Entity\Category
-     */
     public function getEquipmentCategory()
     {
         return $this->equipmentCategory;
     }
 
-    /**
-     * Set author
-     *
-     * @param \CM\AccessBundle\Entity\User $author
-     *
-     * @return Equipment
-     */
     public function setAuthor(\CM\AccessBundle\Entity\User $author)
     {
         $this->author = $author;
@@ -319,37 +216,49 @@ class Equipment
         return $this;
     }
 
-    /**
-     * Get author
-     *
-     * @return \CM\AccessBundle\Entity\User
-     */
     public function getAuthor()
     {
         return $this->author;
     }
 
-    /**
-     * Set target
-     *
-     * @param \CM\ConstructionBundle\Entity\Construction $target
-     *
-     * @return Equipment
-     */
-    public function setTarget(\CM\ConstructionBundle\Entity\Construction $target = null)
+    public function setTarget(Construction $target = null)
     {
         $this->target = $target;
 
         return $this;
     }
 
-    /**
-     * Get target
-     *
-     * @return \CM\ConstructionBundle\Entity\Construction
-     */
     public function getTarget()
     {
         return $this->target;
+    }
+
+    public function addHistory(History $history)
+    {
+        $this->histories[] = $history;
+
+        return $this;
+    }
+
+    public function removeHistory(History $history)
+    {
+        $this->histories->removeElement($history);
+    }
+
+    public function getHistories()
+    {
+        return $this->histories;
+    }
+
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getOwner()
+    {
+        return $this->owner;
     }
 }

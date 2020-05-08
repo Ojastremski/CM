@@ -39,7 +39,7 @@ class EquipmentForm extends AbstractType
             ->add('equipmentCategory', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'categoryName',
-                'placeholder' => 'Wybierz kategorię',
+                'placeholder' => 'Wybierz kategorie',
                 'required' => false,
                 'label' => 'Kategoria'
             ])
@@ -48,9 +48,9 @@ class EquipmentForm extends AbstractType
                     'maxlength' => '30'
                 ],
                 'constraints' => [
-                    new NotBlank(),
                     new Length(['min' => 2]),
                 ],
+                'required' => false,
                 'label' => 'Nr. seryjny'
             ])
             ->add('note', TextareaType::class, [
@@ -72,9 +72,19 @@ class EquipmentForm extends AbstractType
             ->add('target', EntityType::class, [
                 'class' => Construction::class,
                 'choice_label' => 'constructionName',
-                'placeholder' => 'Wybierz budowę',
+                'placeholder' => 'Magazyn',
                 'required' => false,
                 'label' => 'Wydanie na budowę'
+            ])
+            ->add('owner', TextType::class, [
+                'attr' => [
+                    'maxlength' => '30',
+                ],
+                'constraints' => [
+                    new Length(['min' => 3])
+                ],
+                'required' => false,
+                'label' => 'Kto oddał'
             ])
             ->add('recipient', TextType::class, [
                 'attr' => [

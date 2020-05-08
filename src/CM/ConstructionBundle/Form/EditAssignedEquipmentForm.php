@@ -9,34 +9,24 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 
 use CM\ConstructionBundle\Entity\Construction;
-use CM\ConstructionBundle\Entity\Category;
 use CM\ConstructionBundle\Entity\Equipment;
+
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ParamToEquipmentForm extends AbstractType 
+class EditAssignedEquipmentForm extends AbstractType 
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('allCategory', EntityType::class, [
-                'attr' => [
-                    'class' => 'searchBox'
-                ],
-                'class' => Category::class,
-                'choice_label' => 'categoryName',
-                'placeholder' => 'Wybierz kategorię',
-                'required' => false,
-                'label' => false
-            ])
-            ->add('allConstruction', EntityType::class, [
+            ->add('target', EntityType::class, [
                 'attr' => [
                     'class' => 'searchBox'
                 ],
                 'class' => Construction::class,
                 'choice_label' => 'constructionName',
-                'placeholder' => 'Magazyn',
+                'placeholder' => 'Wybierz budowę',
                 'required' => false,
-                'label' => false
+                'label' => 'Obiekt'
             ])
             ->add('owner', TextType::class, [
                 'attr' => [
@@ -45,7 +35,7 @@ class ParamToEquipmentForm extends AbstractType
                     'class' => 'searchBox'
                 ],
                 'required' => false,
-                'label' => false,
+                'label' => 'Kto oddał',
             ])
             ->add('recipient', TextType::class, [
                 'attr' => [
@@ -53,15 +43,11 @@ class ParamToEquipmentForm extends AbstractType
                     'maxlength' => '30',
                     'class' => 'searchBox'
                 ],
+                'constraints' => [
+                    new Length(['min' => 3])
+                ],
                 'required' => false,
-                'label' => false,
-            ])
-            ->add('checkbox', EntityType::class, [
-                'class' => Equipment::class,
-                'label' => false,
-                'choice_label' => false,
-                'multiple' => true,
-                'expanded' => true
+                'label' => 'Odbiorca',
             ])
         ;
     }

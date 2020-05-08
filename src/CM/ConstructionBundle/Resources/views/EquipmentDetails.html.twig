@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container body-container">
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                {{ include('form/confirmation_message.html.twig', 
+                    {
+                        path: 'equipment_delete',
+                        text: 'Czy na pewno chcesz usunąć ten sprzęt?',
+                        btnlabel: 'Usuń sprzęt'
+                    }) 
+                }}
+                <h1>{{ equipment.equipmentName }}</h1>
+                
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fas fa-user"></i> {{ equipment.author.username }}</span>
+                </p>
+                <p class="post-metadata">
+                    <span class="metadata"><i class="fas fa-calendar-alt"></i> {{ equipment.publishedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
+                </p>
+                <p class="post-metadata">
+                    {% if equipment.modifiedAt == null %}
+                        <span class="metadata"><i class="fas fa-edit"></i> nie modyfikowano</span>
+                    {% else %}
+                        <span class="metadata"><i class="fas fa-edit"></i> {{ equipment.modifiedAt|localizeddate('long', 'medium', null, 'UTC') }}</span>
+                    {% endif %}
+                </p>
+
+                {% if equipment.noteVisibility == 'subpage' %}
+                    <div class="alert alert-warning" role="alert">
+                        <p>{{ equipment.note }}</p>
+                    </div>
+                {% else %}
+                    <br/>
+                {% endif %}
+
+                <h3>Bieżąca lokalizacja</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Obiekt</th>
+                            <th scope="col">Kto oddał</th>
+                            <th scope="col">Odbiorca</th>
+                            <th scope="col">Data nadania</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% if equipment.target == null %}
+                                <td>Magazyn</td>
+                            {% else %}
+                                <td>{{ equipment.target.constructionName }}</td>
+                            {% endif %}
+                            <td>{{ equipment.owner }}</td>
+                            <td>{{ equipment.recipient }}</td>
+                            <td>{{ equipment.assignmentDate|localizeddate('medium', 'short', null, 'UTC') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="sidebar" class="col-sm-3">
+                <div class="section actions">
+                    <a href="{{ path('equipment_edit', {id: equipment.id}) }}" class="btn btn-block btn-lg btn-primary">
+                        <i class="fas fa-edit" aria-hidden="true"></i> 
+                        Edytuj
+                    </a>
+                </div>
+                <div class="section actions">
+                    <a data-element-id="{{equipment.id}}" data-toggle="modal" href="#confirmationModal" class="btn btn-lg btn-block btn-danger">
+                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                        Usuń
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Historia</h1>
+                <table id="scroll" class="table table-striped table-middle-aligned">
+                    <thead>
+                        <tr>
+                            <th scope="col">Informacja <i class="fas fa-sort"></i></th>
+                            <th scope="col">Kto oddał <i class="fas fa-sort"></i></th>
+                            <th scope="col">Odbiorca <i class="fas fa-sort"></i></th>
+                            <th scope="col">Data <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for history in equipment.histories %}
+                            <tr>
+                                <td>{{ history.message }}</td>
+                                <td>{{ history.owner }}</td>
+                                <td>{{ history.recipient }}</td>
+                                <td>{{ history.date|localizeddate('medium', 'short', null, 'UTC') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>           
+            </div>
+        </div>
+    </div>
+    {% raw %}
+        <script>
+            $('#scroll').DataTable({
+                "paging": false,
+                "info": false,
+                "language": { search: '', searchPlaceholder: "Wyszukaj po tytule ..." }
+            });
+            $("input[type='search']").addClass('searchBox');
+        </script>
+    {% endraw %}
+{% endblock %}

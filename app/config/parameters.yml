@@ -2,7 +2,7 @@
 parameters:
     database_host: 127.0.0.1
     database_port: 3306
-    database_name: cm
+    database_name: uwem
     database_user: root
     database_password: null
     mailer_transport: smtp

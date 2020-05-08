@@ -1,6 +1,14 @@
+home:
+    path:     /
+    defaults: { _controller: AccessBundle:Home:index }
+
 login:
     path:     /login
     defaults: { _controller: AccessBundle:Access:login }
+
+registration:
+    path:     /registration
+    defaults: { _controller: AccessBundle:User:registration }
 
 logout:
     path:     /logout
